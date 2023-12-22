@@ -24,7 +24,7 @@ public class DesenvolvedoresController : ControllerBase
         Desenvolvedores desenvolvedores = _mapper.Map<Desenvolvedores>(desenvolvedoresDto);
         _context.Desenvolvedores.Add(desenvolvedores);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(RecuperaDesenvolvedoresPorId), new { Id = desenvolvedores.Id }, desenvolvedoresDto);
+        return CreatedAtAction(nameof(RecuperaDesenvolvedoresPorId), new { desenvolvedores.Id }, desenvolvedoresDto);
     }
 
     [HttpGet]

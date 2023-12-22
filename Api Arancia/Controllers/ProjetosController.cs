@@ -25,8 +25,8 @@ public class ProjetosController : ControllerBase
         Projetos projeto = _mapper.Map<Projetos>(projetosDto);
         _context.Projetos.Add(projeto);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(RecuperaProjetodPorId), 
-            new { empresaId = projeto.EmpresaId, desenvolvedoresId = projeto.Desenvolvedores }, projeto);
+        return CreatedAtAction(nameof(RecuperaProjetosPorId),
+            new { projeto.Id}, projeto);
     }
 
     [HttpGet]
@@ -35,10 +35,10 @@ public class ProjetosController : ControllerBase
         return _mapper.Map<List<ReadProjetosDto>>(_context.Projetos);
     }
 
-    [HttpGet("{empresaId}/{desenvolvedoresId}")]
-    public IActionResult RecuperaProjetodPorId(int empresaId, int desenvolvedoresId)
+    [HttpGet("{id}")]
+    public IActionResult RecuperaProjetosPorId(int Id)
     {
-        Projetos projeto = _context.Projetos.FirstOrDefault(projeto => projeto.EmpresaId == empresaId && projeto.DesenvolvedoresId == desenvolvedoresId);
+        var projeto = _context.Projetos.FirstOrDefault(projeto => projeto.Id == Id);
         if (projeto != null)
         {
             ReadProjetosDto projetosDto = _mapper.Map<ReadProjetosDto>(projeto);
@@ -49,9 +49,9 @@ public class ProjetosController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult AtualizaProjetos(int id, [FromBody] UpdateProjetosDto projetosDto)
+    public IActionResult AtualizaProjetos(int Id, [FromBody] UpdateProjetosDto projetosDto)
     {
-        Projetos projeto = _context.Projetos.FirstOrDefault(projeto => projeto.Id == id);
+        Projetos projeto = _context.Projetos.FirstOrDefault(projeto => projeto.Id == Id);
         if (projeto == null)
         {
             return NotFound();
@@ -63,9 +63,9 @@ public class ProjetosController : ControllerBase
 
 
     [HttpDelete("{id}")]
-    public IActionResult DeletaEndereco(int id)
+    public IActionResult DeletaEndereco( int Id)
     {
-        Projetos projeto = _context.Projetos.FirstOrDefault(projeto => projeto.Id == id);
+        Projetos projeto = _context.Projetos.FirstOrDefault(projeto => projeto.Id == Id);
         if (projeto == null)
         {
             return NotFound();

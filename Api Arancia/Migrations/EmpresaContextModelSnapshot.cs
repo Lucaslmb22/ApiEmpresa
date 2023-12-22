@@ -31,7 +31,7 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Desenvolvedores");
+                    b.ToTable("Desenvolvedores", (string)null);
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Empresa", b =>
@@ -47,44 +47,43 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Empresas");
+                    b.ToTable("Empresas", (string)null);
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Projetos", b =>
                 {
-                    b.Property<int?>("EmpresaId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("DesenvolvedoresId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("EmpresaId", "DesenvolvedoresId");
+                    b.HasKey("Id");
 
                     b.HasIndex("DesenvolvedoresId");
 
-                    b.ToTable("Projetos");
+                    b.HasIndex("EmpresaId");
+
+                    b.ToTable("Projetos", (string)null);
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Projetos", b =>
                 {
                     b.HasOne("Api_Arancia.Modelos.Desenvolvedores", "Desenvolvedores")
                         .WithMany("Projetos")
-                        .HasForeignKey("DesenvolvedoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DesenvolvedoresId");
 
                     b.HasOne("Api_Arancia.Modelos.Empresa", "Empresa")
                         .WithMany("Projetos")
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmpresaId");
 
                     b.Navigation("Desenvolvedores");
 

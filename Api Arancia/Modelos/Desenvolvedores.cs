@@ -8,5 +8,6 @@ public class Desenvolvedores
 
     [Required(ErrorMessage = "O campo de nome é obrigatório.")]
     public string Nome { get; set; }
+
     public virtual ICollection<Projetos> Projetos { get; set; }
 }

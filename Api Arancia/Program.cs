@@ -9,12 +9,16 @@ builder.Services.AddDbContext<EmpresaContext>
     (opts => opts.UseMySql(builder.Configuration.
     GetConnectionString("EmpresaConnection"), ServerVersion.AutoDetect(connectionString)));
 
+builder.Services.AddMvc(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
