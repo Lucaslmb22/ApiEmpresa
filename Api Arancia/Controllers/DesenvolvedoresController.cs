@@ -36,7 +36,7 @@ public class DesenvolvedoresController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult RecuperaDesenvolvedoresPorId(int id)
     {
-        Desenvolvedores desenvolvedores = _context.Desenvolvedores.FirstOrDefault(desenvolvedores => desenvolvedores.Id == id);
+        Desenvolvedores desenvolvedores = _context.Desenvolvedores.FirstOrDefault(desenvolvedores => desenvolvedores.Id == id).;
         if (desenvolvedores != null)
         {
             ReadDesenvolvedoresDto desenvolvedoresDto = _mapper.Map<ReadDesenvolvedoresDto>(desenvolvedores);
