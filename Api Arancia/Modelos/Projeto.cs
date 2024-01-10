@@ -2,7 +2,7 @@
 
 namespace Api_Arancia.Modelos;
 
-public class Projetos
+public class Projeto
 {
     public int Id { get; set; }
     [Required]
@@ -12,6 +12,6 @@ public class Projetos
 
     public int? DesenvolvedoresId { get; set; }
 
-    public virtual Desenvolvedores Desenvolvedores { get; set; }
+    public virtual Desenvolvedor Desenvolvedores { get; set; }
  
 }

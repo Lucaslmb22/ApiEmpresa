@@ -14,7 +14,7 @@ public class EmpresaContext : DbContext
 
 
 
-    public DbSet<Empresa> Empresas { get; set; }
-    public DbSet<Projetos> Projetos { get; set; }
-    public DbSet<Desenvolvedores> Desenvolvedores { get; set; }
+    public DbSet<Empresa> Empresa { get; set; }
+    public DbSet<Projeto> Projeto { get; set; }
+    public DbSet<Desenvolvedor> Desenvolvedor { get; set; }
 }

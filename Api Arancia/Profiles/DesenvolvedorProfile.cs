@@ -4,14 +4,14 @@ using AutoMapper;
 
 namespace Api_Arancia.Profiles;
 
-public class DesenvolvedoresProfile : Profile
+public class DesenvolvedorProfile : Profile
 {
-    public DesenvolvedoresProfile()
+    public DesenvolvedorProfile()
     {
-        CreateMap<CreateDesenvolvedoresDto, Desenvolvedores>();
-        CreateMap<Desenvolvedores, ReadDesenvolvedoresDto>()
+        CreateMap<CreateDesenvolvedorDto, Desenvolvedor>();
+        CreateMap<Desenvolvedor, ReadDesenvolvedorDto>()
             .ForMember(desenvolvedoresDto => desenvolvedoresDto.Projetos,
             opt => opt.MapFrom(desenvolvedores => desenvolvedores.Projetos));
-        CreateMap<UpdateDesenvolvedoresDto, Desenvolvedores>();
+        CreateMap<UpdateDesenvolvedorDto, Desenvolvedor>();
     }
 }

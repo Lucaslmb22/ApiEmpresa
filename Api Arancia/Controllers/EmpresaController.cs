@@ -23,21 +23,21 @@ public class EmpresaController : ControllerBase
     public IActionResult AdicionaEmpresa([FromBody] CreateEmpresaDto empresaDto)
     {
         Empresa empresa = _mapper.Map<Empresa>(empresaDto);
-        _context.Empresas.Add(empresa);
+        _context.Empresa.Add(empresa);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(RecuperaEmpresasPorId), new { id = empresa.Id }, empresa);
+        return CreatedAtAction(nameof(RecuperaEmpresaPorId), new { id = empresa.Id }, empresa);
     }
 
     [HttpGet]
     public IEnumerable<ReadEmpresaDto> RecuperaEmpresas()
     {
-        return _mapper.Map<List<ReadEmpresaDto>>(_context.Empresas.ToList());
+        return _mapper.Map<List<ReadEmpresaDto>>(_context.Empresa.ToList());
     }
 
     [HttpGet("{id}")]
-    public IActionResult RecuperaEmpresasPorId(int id)
+    public IActionResult RecuperaEmpresaPorId(int id)
     {
-        var empresa = _context.Empresas.FirstOrDefault(empresa => empresa.Id == id);
+        var empresa = _context.Empresa.FirstOrDefault(empresa => empresa.Id == id);
         if (empresa == null) return NotFound();
         var empresaDto = _mapper.Map<ReadEmpresaDto>(empresa);
         return Ok(empresaDto);
@@ -46,7 +46,7 @@ public class EmpresaController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaEmpresas(int id, [FromBody] UpdateEmpresaDto empresaDto)
     {
-        var empresa = _context.Empresas.FirstOrDefault(empresa => empresa.Id == id);
+        var empresa = _context.Empresa.FirstOrDefault(empresa => empresa.Id == id);
         if (empresa == null) return NotFound();
         _mapper.Map(empresaDto, empresa);
         _context.SaveChanges();
@@ -56,7 +56,7 @@ public class EmpresaController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletaEmpresa(int id)
     {
-        var empresa = _context.Empresas.FirstOrDefault(
+        var empresa = _context.Empresa.FirstOrDefault(
             empresa => empresa.Id == id);
         if (empresa == null) return NotFound();
         _context.Remove(empresa);

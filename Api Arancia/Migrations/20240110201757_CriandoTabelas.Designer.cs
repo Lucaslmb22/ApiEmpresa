@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_Arancia.Migrations
 {
     [DbContext(typeof(EmpresaContext))]
-    [Migration("20231221202648_Projetos e Empresa")]
-    partial class ProjetoseEmpresa
+    [Migration("20240110201757_CriandoTabelas")]
+    partial class CriandoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace Api_Arancia.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Desenvolvedor");
+                });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Empresa", b =>
                 {
@@ -34,13 +49,16 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Empresas");
+                    b.ToTable("Empresa");
                 });
 
-            modelBuilder.Entity("Api_Arancia.Modelos.Projetos", b =>
+            modelBuilder.Entity("Api_Arancia.Modelos.Projeto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DesenvolvedoresId")
                         .HasColumnType("int");
 
                     b.Property<int?>("EmpresaId")
@@ -52,18 +70,31 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DesenvolvedoresId");
+
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Projetos");
+                    b.ToTable("Projeto");
                 });
 
-            modelBuilder.Entity("Api_Arancia.Modelos.Projetos", b =>
+            modelBuilder.Entity("Api_Arancia.Modelos.Projeto", b =>
                 {
+                    b.HasOne("Api_Arancia.Modelos.Desenvolvedor", "Desenvolvedores")
+                        .WithMany("Projetos")
+                        .HasForeignKey("DesenvolvedoresId");
+
                     b.HasOne("Api_Arancia.Modelos.Empresa", "Empresa")
                         .WithMany("Projetos")
                         .HasForeignKey("EmpresaId");
 
+                    b.Navigation("Desenvolvedores");
+
                     b.Navigation("Empresa");
+                });
+
+            modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedor", b =>
+                {
+                    b.Navigation("Projetos");
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Empresa", b =>

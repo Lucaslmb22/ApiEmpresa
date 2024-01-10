@@ -19,7 +19,7 @@ namespace Api_Arancia.Migrations
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedores", b =>
+            modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,7 +31,7 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Desenvolvedores", (string)null);
+                    b.ToTable("Desenvolvedor");
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Empresa", b =>
@@ -47,10 +47,10 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Empresas", (string)null);
+                    b.ToTable("Empresa");
                 });
 
-            modelBuilder.Entity("Api_Arancia.Modelos.Projetos", b =>
+            modelBuilder.Entity("Api_Arancia.Modelos.Projeto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,12 +72,12 @@ namespace Api_Arancia.Migrations
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Projetos", (string)null);
+                    b.ToTable("Projeto");
                 });
 
-            modelBuilder.Entity("Api_Arancia.Modelos.Projetos", b =>
+            modelBuilder.Entity("Api_Arancia.Modelos.Projeto", b =>
                 {
-                    b.HasOne("Api_Arancia.Modelos.Desenvolvedores", "Desenvolvedores")
+                    b.HasOne("Api_Arancia.Modelos.Desenvolvedor", "Desenvolvedores")
                         .WithMany("Projetos")
                         .HasForeignKey("DesenvolvedoresId");
 
@@ -90,7 +90,7 @@ namespace Api_Arancia.Migrations
                     b.Navigation("Empresa");
                 });
 
-            modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedores", b =>
+            modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedor", b =>
                 {
                     b.Navigation("Projetos");
                 });
