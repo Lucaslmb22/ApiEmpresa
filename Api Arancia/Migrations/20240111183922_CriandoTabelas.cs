@@ -51,14 +51,14 @@ namespace Api_Arancia.Migrations
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     EmpresaId = table.Column<int>(type: "int", nullable: true),
-                    DesenvolvedoresId = table.Column<int>(type: "int", nullable: true)
+                    DesenvolvedorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projeto", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projeto_Desenvolvedor_DesenvolvedoresId",
-                        column: x => x.DesenvolvedoresId,
+                        name: "FK_Projeto_Desenvolvedor_DesenvolvedorId",
+                        column: x => x.DesenvolvedorId,
                         principalTable: "Desenvolvedor",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -70,9 +70,9 @@ namespace Api_Arancia.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projeto_DesenvolvedoresId",
+                name: "IX_Projeto_DesenvolvedorId",
                 table: "Projeto",
-                column: "DesenvolvedoresId");
+                column: "DesenvolvedorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projeto_EmpresaId",

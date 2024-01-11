@@ -9,5 +9,5 @@ public class Desenvolvedor
     [Required(ErrorMessage = "O campo de nome é obrigatório.")]
     public string Nome { get; set; }
 
-    public virtual ICollection<Projeto> Projetos { get; set; }
+    public virtual ICollection<Projeto> Projeto { get; set; }
 }

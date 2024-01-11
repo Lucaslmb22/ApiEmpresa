@@ -11,7 +11,7 @@ public class EmpresaProfile : Profile
         CreateMap<CreateEmpresaDto, Empresa>();
         CreateMap<UpdateEmpresaDto, Empresa>();
         CreateMap<Empresa, ReadEmpresaDto>()
-            .ForMember(empresaDto => empresaDto.Projetos,
-            opt => opt.MapFrom(empresa => empresa.Projetos));
+            .ForMember(empresaDto => empresaDto.Projeto,
+            opt => opt.MapFrom(empresa => empresa.Projeto));
     }
 }

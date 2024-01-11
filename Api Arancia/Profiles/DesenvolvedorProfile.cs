@@ -10,8 +10,8 @@ public class DesenvolvedorProfile : Profile
     {
         CreateMap<CreateDesenvolvedorDto, Desenvolvedor>();
         CreateMap<Desenvolvedor, ReadDesenvolvedorDto>()
-            .ForMember(desenvolvedoresDto => desenvolvedoresDto.Projetos,
-            opt => opt.MapFrom(desenvolvedores => desenvolvedores.Projetos));
+            .ForMember(desenvolvedoresDto => desenvolvedoresDto.Projeto,
+            opt => opt.MapFrom(desenvolvedores => desenvolvedores.Projeto));
         CreateMap<UpdateDesenvolvedorDto, Desenvolvedor>();
     }
 }

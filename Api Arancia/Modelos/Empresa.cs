@@ -10,5 +10,5 @@ public class Empresa
     [MaxLength(100)]
     public string Nome { get; set; }
 
-    public virtual ICollection<Projeto> Projetos { get; set; }
+    public virtual ICollection<Projeto> Projeto { get; set; }
 }

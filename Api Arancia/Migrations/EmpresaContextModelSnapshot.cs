@@ -56,7 +56,7 @@ namespace Api_Arancia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DesenvolvedoresId")
+                    b.Property<int?>("DesenvolvedorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("EmpresaId")
@@ -68,7 +68,7 @@ namespace Api_Arancia.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DesenvolvedoresId");
+                    b.HasIndex("DesenvolvedorId");
 
                     b.HasIndex("EmpresaId");
 
@@ -77,27 +77,27 @@ namespace Api_Arancia.Migrations
 
             modelBuilder.Entity("Api_Arancia.Modelos.Projeto", b =>
                 {
-                    b.HasOne("Api_Arancia.Modelos.Desenvolvedor", "Desenvolvedores")
-                        .WithMany("Projetos")
-                        .HasForeignKey("DesenvolvedoresId");
+                    b.HasOne("Api_Arancia.Modelos.Desenvolvedor", "Desenvolvedor")
+                        .WithMany("Projeto")
+                        .HasForeignKey("DesenvolvedorId");
 
                     b.HasOne("Api_Arancia.Modelos.Empresa", "Empresa")
-                        .WithMany("Projetos")
+                        .WithMany("Projeto")
                         .HasForeignKey("EmpresaId");
 
-                    b.Navigation("Desenvolvedores");
+                    b.Navigation("Desenvolvedor");
 
                     b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Desenvolvedor", b =>
                 {
-                    b.Navigation("Projetos");
+                    b.Navigation("Projeto");
                 });
 
             modelBuilder.Entity("Api_Arancia.Modelos.Empresa", b =>
                 {
-                    b.Navigation("Projetos");
+                    b.Navigation("Projeto");
                 });
 #pragma warning restore 612, 618
         }

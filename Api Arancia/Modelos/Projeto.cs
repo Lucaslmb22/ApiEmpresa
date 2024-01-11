@@ -10,8 +10,8 @@ public class Projeto
     public int? EmpresaId { get; set; }
     public virtual Empresa Empresa { get; set; }
 
-    public int? DesenvolvedoresId { get; set; }
+    public int? DesenvolvedorId { get; set; }
 
-    public virtual Desenvolvedor Desenvolvedores { get; set; }
+    public virtual Desenvolvedor Desenvolvedor { get; set; }
  
 }

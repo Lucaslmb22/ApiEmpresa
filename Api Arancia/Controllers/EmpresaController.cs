@@ -2,6 +2,7 @@
 using Api_Arancia.Data.Dtos;
 using Api_Arancia.Modelos;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_Arancia.Controllers;
@@ -49,6 +50,26 @@ public class EmpresaController : ControllerBase
         var empresa = _context.Empresa.FirstOrDefault(empresa => empresa.Id == id);
         if (empresa == null) return NotFound();
         _mapper.Map(empresaDto, empresa);
+        _context.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpPatch]
+    public IActionResult AtualizaEmpresaParcial(int id, JsonPatchDocument<UpdateEmpresaDto> patch)
+    {
+        var empresa = _context.Empresa.FirstOrDefault(empresa => empresa.Id == id);
+        if (empresa == null) return NotFound();
+
+        var empresaParaAtualizar = _mapper.Map<UpdateEmpresaDto>(empresa);
+
+        patch.ApplyTo(empresaParaAtualizar, ModelState);
+
+        if (!TryValidateModel(empresaParaAtualizar))
+        {
+            return ValidationProblem(ModelState);
+        }
+
+        _mapper.Map(empresaParaAtualizar, empresa);
         _context.SaveChanges();
         return NoContent();
     }

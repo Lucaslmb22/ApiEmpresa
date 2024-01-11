@@ -2,6 +2,7 @@
 using Api_Arancia.Data.Dtos;
 using Api_Arancia.Modelos;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_Arancia.Controllers;
@@ -54,6 +55,26 @@ public class DesenvolvedorController : ControllerBase
             return NotFound();
         }
         _mapper.Map(desenvolvedorDto, desenvolvedor);
+        _context.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpPatch]
+    public IActionResult AtualizaDesenvolvedorParcial(int id, JsonPatchDocument<UpdateDesenvolvedorDto> patch)
+    {
+        var desenvolvedor = _context.Desenvolvedor.FirstOrDefault(desenvolvedor => desenvolvedor.Id == id);
+        if (desenvolvedor == null) return NotFound();
+
+        var desenvolvedorParaAtualizar = _mapper.Map<UpdateDesenvolvedorDto>(desenvolvedor);
+
+        patch.ApplyTo(desenvolvedorParaAtualizar, ModelState);
+
+        if (!TryValidateModel(desenvolvedorParaAtualizar))
+        {
+            return ValidationProblem(ModelState);
+        }
+
+        _mapper.Map(desenvolvedorParaAtualizar, desenvolvedor);
         _context.SaveChanges();
         return NoContent();
     }
